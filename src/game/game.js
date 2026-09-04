@@ -97,7 +97,7 @@ class Game {
                     if (solved) {
                         console.log("\nCorrect! You solved the puzzle.");
 
-                        this.currentRound.endRound();
+                        this.endRound();
                     } else {
                         console.log("\nIncorrect solution.");
                     }
@@ -107,6 +107,32 @@ class Game {
         }
 
         return card;
+    }
+
+    endRound() {
+        let roundWinner = this.players[0];
+
+        for (const player of this.players) {
+            if (player.playerRoundTotal > roundWinner.playerRoundTotal) {
+                roundWinner = player;
+            }
+        }
+
+        roundWinner.playerGrandTotal += roundWinner.playerRoundTotal;
+
+        console.log(
+            `\n🏆 ${roundWinner.playerName} wins the round!`
+        );
+
+        console.log(
+            `Round Total: $${roundWinner.playerRoundTotal}`
+        );
+
+        console.log(
+            `Grand Total: $${roundWinner.playerGrandTotal}`
+        );
+
+        this.currentRound.endRound();
     }
 
     nextPlayer() {
