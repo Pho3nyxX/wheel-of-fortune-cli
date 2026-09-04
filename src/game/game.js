@@ -89,7 +89,10 @@ class Game {
                         `Round Total: $${this.currentPlayer.playerRoundTotal}`
                     );
 
-                    console.log("\nPuzzle:", puzzle.showPuzzle());
+                    console.log(
+                        "\nPuzzle:",
+                        puzzle.showPuzzle()
+                    );
                 }
 
                 if (action === "solve") {
@@ -98,13 +101,15 @@ class Game {
                     const solved = puzzle.solve(solution);
 
                     if (solved) {
-                        console.log("\nCorrect! You solved the puzzle.");
+                        console.log(
+                            "\nCorrect! You solved the puzzle."
+                        );
 
                         this.endRound();
-
-                        return card;
                     } else {
-                        console.log("\nIncorrect solution.");
+                        console.log(
+                            "\nIncorrect solution."
+                        );
                     }
                 }
 
