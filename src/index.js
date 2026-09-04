@@ -9,11 +9,15 @@ async function start() {
 
     await game.start(PLAYER_COUNT);
 
-    console.log(
-        `\nCurrent Player: ${game.currentPlayer.playerName}`
-    );
+    console.log("\n🎉 Game Complete!");
 
-    await game.startNextTurn();
+    console.log("\nFinal Scores:");
+
+    game.players.forEach((player) => {
+        console.log(
+            `${player.playerName}: $${player.playerGrandTotal}`
+        );
+    });
 }
 
 start();

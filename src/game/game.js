@@ -18,9 +18,12 @@ class Game {
         this.players = await Player.createPlayers(playerCount);
     }
 
-    initializeRound() {
+    initializeRound(puzzleText) {
         this.currentRound = new Round();
-        this.currentRound.puzzle.choosePuzzle();
+
+        this.currentRound.puzzle.solution = puzzleText;
+        this.currentRound.puzzle.category = "Phrase";
+
         this.roundInitialized = true;
     }
 
@@ -98,6 +101,8 @@ class Game {
                         console.log("\nCorrect! You solved the puzzle.");
 
                         this.endRound();
+
+                        return card;
                     } else {
                         console.log("\nIncorrect solution.");
                     }
@@ -142,12 +147,44 @@ class Game {
         this.currentPlayer = this.players[this.currentPlayerIndex];
     }
 
+    randomlyChooseThreePuzzles() {
+        const puzzles = [];
+
+        while (puzzles.length < 3) {
+            const round = new Round();
+
+            round.puzzle.choosePuzzle();
+
+            if (!puzzles.includes(round.puzzle.solution)) {
+                puzzles.push(round.puzzle.solution);
+            }
+        }
+
+        return puzzles;
+    }
+
     async start(playerCount) {
         await this.initializePlayers(playerCount);
 
-        this.initializeRound();
-
         this.initializeCurrentPlayer();
+
+        const puzzles = this.randomlyChooseThreePuzzles();
+
+        for (const solution of puzzles) {
+            this.initializeRound(solution);
+
+            while (!this.currentRound.hasEnded) {
+                await this.startNextTurn();
+
+                if (!this.currentRound.hasEnded) {
+                    this.nextPlayer();
+                }
+            }
+
+            for (const player of this.players) {
+                player.playerRoundTotal = 0;
+            }
+        }
     }
 }
 
