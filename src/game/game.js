@@ -190,6 +190,35 @@ class Game {
                 player.playerRoundTotal = 0;
             }
         }
+
+        let gameWinner = this.players[0];
+
+        for (const player of this.players) {
+            if (
+                player.playerGrandTotal >
+                gameWinner.playerGrandTotal
+            ) {
+                gameWinner = player;
+            }
+        }
+
+        console.log("\n==============================");
+        console.log("       FINAL GAME RESULTS");
+        console.log("==============================");
+
+        for (const player of this.players) {
+            console.log(
+                `${player.playerName}: $${player.playerGrandTotal}`
+            );
+        }
+
+        console.log(
+            `\n🏆 ${gameWinner.playerName} wins the game!`
+        );
+
+        console.log(
+            `Final Total: $${gameWinner.playerGrandTotal}`
+        );
     }
 }
 
