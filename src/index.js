@@ -1,0 +1,1 @@
+console.log("Wheel of Fortune CLI");
