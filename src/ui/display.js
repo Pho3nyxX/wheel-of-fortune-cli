@@ -15,7 +15,7 @@ export function displayWelcome() {
     );
 
     console.log(
-        chalk.yellow("\n Welcome to Wheel of Fortune!\n")
+        chalk.yellow("\nWelcome to Wheel of Fortune!\n")
     );
 }
 
@@ -50,19 +50,19 @@ export function displayPlayer(player) {
 export function displayWheelResult(card) {
     if (card.type === "MONEY") {
         console.log(
-            chalk.green(`\n You spun $${card.value}!`)
+            chalk.green(`\nYou spun $${card.value}!`)
         );
     }
 
     if (card.type === "BANKRUPT") {
         console.log(
-            chalk.red("\n BANKRUPT!")
+            chalk.red("\nBANKRUPT!")
         );
     }
 
     if (card.type === "LOSE A TURN") {
         console.log(
-            chalk.magenta("\n LOSE A TURN!")
+            chalk.magenta("\nLOSE A TURN!")
         );
     }
 }
@@ -108,7 +108,7 @@ export function displayIncorrectSolution() {
 export function displaySolvedPuzzle() {
     console.log(
         chalk.green(
-            "\n Correct! You solved the puzzle!"
+            "\nCorrect! You solved the puzzle!"
         )
     );
 }
