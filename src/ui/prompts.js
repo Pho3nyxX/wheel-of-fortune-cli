@@ -20,7 +20,9 @@ export async function askForLetter() {
     return await input({
         message: "Enter a letter:",
         validate: (value) => {
-            if (value.length !== 1 || !/[a-zA-Z]/.test(value)) {
+            const letter = value.trim();
+
+            if (letter.length !== 1 || !/[a-zA-Z]/.test(letter)) {
                 return "Please enter one letter.";
             }
 

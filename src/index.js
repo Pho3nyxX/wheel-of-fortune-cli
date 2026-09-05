@@ -11,4 +11,17 @@ async function start() {
     await game.start(PLAYER_COUNT);
 }
 
-start();
+start().catch((error) => {
+    if (error?.name === "ExitPromptError") {
+        console.log("\n👋 Thanks for playing Wheel of Fortune!");
+        return;
+    }
+
+    console.error(
+        "\nSomething went wrong while running the game."
+    );
+
+    console.error(
+        "Please try running the game again."
+    );
+});
